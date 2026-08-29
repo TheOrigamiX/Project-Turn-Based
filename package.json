@@ -1,0 +1,18 @@
+{
+  "name": "rpg-coop-game",
+  "version": "0.1.0",
+  "description": "Web RPG Co-op Turn-Based Multiplayer (PvE) — Firebase + Vanilla JS ES6 Modules",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview",
+    "deploy:rules": "firebase deploy --only firestore:rules,database"
+  },
+  "dependencies": {
+    "firebase": "^10.12.0"
+  },
+  "devDependencies": {
+    "vite": "^5.2.0"
+  }
+}
