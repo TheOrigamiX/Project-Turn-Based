@@ -1,0 +1,42 @@
+{
+  "rules": {
+    "battles": {
+      "$roomCode": {
+        // อ่านได้เฉพาะผู้เล่นที่ auth แล้ว และเป็นหนึ่งใน combatants ของห้องนี้
+        ".read": "auth != null && data.child('combatants').child(auth.uid).exists()",
+
+        "combatants": {
+          "$combatantId": {
+            // ผู้เล่นแก้ไขข้อมูลของ "ตัวเอง" ได้เฉพาะตอนเป็นเทิร์นของตัวเองเท่านั้น
+            // ส่วนมอนสเตอร์ ($combatantId เป็น monsterId) ห้าม client เขียนตรง ๆ
+            // — ต้องเขียนผ่าน monsterAIManager ที่รันบน server-trusted context เท่านั้น
+            ".write": "auth != null && auth.uid == $combatantId && root.child('battles/' + $roomCode + '/currentTurn').val() == auth.uid"
+          }
+        },
+
+        "currentTurn": {
+          // ห้าม client เปลี่ยน currentTurn ตรง ๆ — ต้องผ่าน turnOrderManager.nextTurn() เท่านั้น
+          // (ในโปรดักชันจริง ควรย้าย logic นี้ไปรันบน Cloud Functions เพื่อบังคับ rule ได้จริง)
+          ".write": false
+        },
+
+        "turnQueue": {
+          ".write": false
+        },
+
+        "combatLog": {
+          // ผู้เล่นในห้องนี้เพิ่ม log ได้ (append-only ผ่าน push) แต่แก้ไข log เดิมไม่ได้
+          ".read": "auth != null && root.child('battles/' + $roomCode + '/combatants').child(auth.uid).exists()",
+          ".write": "auth != null && root.child('battles/' + $roomCode + '/combatants').child(auth.uid).exists()",
+          "$logId": {
+            ".validate": "!data.exists()"
+          }
+        },
+
+        "status": {
+          ".write": false
+        }
+      }
+    }
+  }
+}
