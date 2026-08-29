@@ -15,14 +15,14 @@ import { getDatabase } from "firebase/database";
 // ควรเก็บค่าที่ sensitive ไว้ใน environment variables (.env)
 // แล้วใช้ผ่าน bundler เช่น Vite (import.meta.env.VITE_FIREBASE_API_KEY)
 const firebaseConfig = {
-  apiKey: import.meta.env.VITE_FIREBASE_API_KEY || "YOUR_API_KEY",
-  authDomain: import.meta.env.VITE_FIREBASE_AUTH_DOMAIN || "YOUR_PROJECT.firebaseapp.com",
-  projectId: import.meta.env.VITE_FIREBASE_PROJECT_ID || "YOUR_PROJECT_ID",
-  storageBucket: import.meta.env.VITE_FIREBASE_STORAGE_BUCKET || "YOUR_PROJECT.appspot.com",
-  messagingSenderId: import.meta.env.VITE_FIREBASE_SENDER_ID || "YOUR_SENDER_ID",
-  appId: import.meta.env.VITE_FIREBASE_APP_ID || "YOUR_APP_ID",
-  // จำเป็นสำหรับ Realtime Database โดยเฉพาะ (URL รูปแบบ https://<project>-default-rtdb.<region>.firebasedatabase.app)
-  databaseURL: import.meta.env.VITE_FIREBASE_DATABASE_URL || "https://YOUR_PROJECT-default-rtdb.firebaseio.com",
+  apiKey: "AIzaSyBN6EVvSc7i5gTXhCSFxVEtDA5jRaDtctc",
+  authDomain: "project-tb-47344.firebaseapp.com",
+  databaseURL: "https://project-tb-47344-default-rtdb.asia-southeast1.firebasedatabase.app",
+  projectId: "project-tb-47344",
+  storageBucket: "project-tb-47344.firebasestorage.app",
+  messagingSenderId: "270857150017",
+  appId: "1:270857150017:web:c1b29c88358c616b06f0c0",
+  measurementId: "G-Q8R8G0HXV8"
 };
 
 // เริ่มต้น Firebase App (ควรมีเพียง instance เดียวทั้งแอป)
